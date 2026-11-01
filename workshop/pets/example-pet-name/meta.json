@@ -1,9 +1,9 @@
 {
-  "name": "My Cool Cat",
+  "name": "kotori",
   "author": "tubeo5866",
-  "description": "A cat that does nothing to your life but stays on your desktop.",
-  "tags": ["cat", "cute", "wtfwhyisitcute"],
+  "description": "a chibi kotori standing at your desktop jusst to give presents",
+  "tags": ["red", "cute", "wtfwhyisitcute"],
   "version": "1.0",
-  "file": "cat.png",
+  "file": "kotori.png",
   "preview": "preview.png"
 }
