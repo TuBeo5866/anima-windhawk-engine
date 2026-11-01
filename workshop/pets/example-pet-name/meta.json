@@ -1,0 +1,9 @@
+{
+  "name": "My Cool Cat",
+  "author": "tubeo5866",
+  "description": "A cat that does nothing to your life but stays on your desktop.",
+  "tags": ["cat", "cute", "wtfwhyisitcute"],
+  "version": "1.0",
+  "file": "cat.png",
+  "preview": "preview.png"
+}
