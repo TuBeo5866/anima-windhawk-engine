@@ -1,0 +1,46 @@
+name: Generate Workshop Index File (index.json)
+
+on:
+  push:
+    paths:
+      - 'workshop/pets/**'
+  workflow_dispatch:
+
+jobs:
+  generate-index:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Scanning workshop/pets and writing a new index.json
+        run: |
+          slugs=$(
+            find workshop/pets -mindepth 1 -maxdepth 1 -type d \
+              -exec basename {} \; | sort
+          )
+
+          json="["
+          first=true
+          while IFS= read -r slug; do
+            [ -z "$slug" ] && continue
+            $first || json+=","
+            json+="\"$slug\""
+            first=false
+          done <<< "$slugs"
+          json+="]"
+
+          echo "$json" > workshop/index.json
+          echo "Generated workshop/index.json:"
+          cat workshop/index.json
+
+      - name: Committing the new index.json for quick workshop scan
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add workshop/index.json
+          git diff --cached --quiet || git commit -m "chore: regenerate workshop/index.json [skip ci]"
+          git push
